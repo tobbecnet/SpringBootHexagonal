@@ -17,10 +17,16 @@
 		<java.version>17</java.version>
 		<kotlin.version>1.9.21</kotlin.version>
 	</properties>
+	<!-- TODO Split up projects. Minimum domain core, Infrastructure/DB, API, Web. -->
+	<!-- TODO Add DependencyManagement section. -->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mustache</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
