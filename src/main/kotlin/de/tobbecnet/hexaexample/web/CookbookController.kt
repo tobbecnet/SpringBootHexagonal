@@ -1,5 +1,7 @@
 package de.tobbecnet.hexaexample.web
 
+import de.tobbecnet.hexaexample.domain.MealUseCases
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
@@ -12,15 +14,17 @@ import org.springframework.web.servlet.ModelAndView
  * Main controller for the cookbook page.
  */
 @Controller
-class CookbookController {
+class CookbookController(@Autowired val mealUseCases: MealUseCases) {
 
-    // TODO i18n
+
+
+    // TODO i18n?
 
     @GetMapping("/")
     fun Index(model: Model): String {
-        model.addAttribute("title", "Cookbook")
-        model["subtitle"] = "Modern recipes for a better world."
-
+        model.addAttribute("title", "The Eurasian vegetarian")
+        model["subtitle"] = "Modern vegetarian recipes for a unique world."
+        model["meals"] = mealUseCases.getAllMeals()
         return "index"
     }
 }

@@ -1,6 +1,21 @@
 {{> header}}
 
-<h1>{{title}}</h1>
-<h3>{{subtitle}}</h3>
+<div class="p-5 text-center bg-body-tertiary">
+    <h1 class="m-3">{{title}}</h1>
+    <h4 class="m-2">{{subtitle}}</h4>
+</div>
+
+<div class="container">
+    {{#meals}}
+    <div class="row my-3">
+        <div class="col-sm-3">
+            {{title}}
+        </div>
+        <div class="col">
+            {{introText}}
+        </div>
+    </div>
+    {{/meals}}
+</div>
 
 {{> footer}}
