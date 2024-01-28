@@ -20,4 +20,10 @@ class MealEntity {
 
     @Column
     var introText: String = ""
+
+    @Column(nullable = false)
+    val ingredientsAsJson: String = "[]"
+
+    @Column(nullable = false)
+    val description: String = ""
 }
