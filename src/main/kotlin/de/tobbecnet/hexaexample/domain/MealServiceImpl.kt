@@ -1,10 +1,13 @@
 package de.tobbecnet.hexaexample.domain
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 
 @Component
-class MealServiceImpl : MealUseCases {
+class MealServiceImpl(
+    @Autowired val mealDataAdapter: MealDataAdapter
+) : MealUseCases {
 
     private val testMealList = listOf(
         Meal(title = "Nasi Goreng",
@@ -27,7 +30,7 @@ class MealServiceImpl : MealUseCases {
         ));
 
     override fun getAllMeals(): Collection<Meal> {
-        return testMealList
+        return mealDataAdapter.getAllMeals()
     }
 
     override fun addMeal(meal: Meal) {

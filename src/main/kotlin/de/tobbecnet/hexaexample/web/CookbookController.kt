@@ -14,9 +14,9 @@ import org.springframework.web.servlet.ModelAndView
  * Main controller for the cookbook page.
  */
 @Controller
-class CookbookController(@Autowired val mealUseCases: MealUseCases) {
-
-
+class CookbookController(
+    @Autowired val mealUseCases: MealUseCases
+) {
 
     // TODO i18n?
 

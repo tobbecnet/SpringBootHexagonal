@@ -13,11 +13,11 @@ class MealEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private val id: UUID? = null
+    val id: UUID? = null
 
     @Column(length = 1024, nullable = false)
-    private val title: String = ""
+    val title: String = ""
 
-    @Column(nullable = false)
-    private var introText: String = ""
+    @Column
+    var introText: String = ""
 }
