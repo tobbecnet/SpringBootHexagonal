@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonMapperBuilder
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import de.tobbecnet.hexaexample.domain.Image
 import de.tobbecnet.hexaexample.domain.Ingredient
 import de.tobbecnet.hexaexample.domain.Meal
 import de.tobbecnet.hexaexample.domain.MealDataAdapter
@@ -28,10 +29,8 @@ class MealDataAdapterImpl(
                     description = it.description,
                     introText = it.introText,
                     ingredients = mapper.readValue<List<Ingredient>>(it.ingredientsAsJson),
-                    imageAsBase64Data = ""      // TODO
+                    images = it.imageCollection.map { motive -> Image(motive.id, motive.type) }
                 )
             }
     }
-
-
 }

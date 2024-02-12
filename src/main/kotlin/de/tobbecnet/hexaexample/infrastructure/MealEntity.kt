@@ -14,16 +14,16 @@ class MealEntity {
     val id: UUID = UUID.randomUUID()
 
     @Column(length = 1024, nullable = false)
-    val title: String = ""
+    var title: String = ""
 
     @Column
-    var introText: String = ""
+    var introText: String? = ""
 
     @Column(length = 4096, nullable = false)
-    val ingredientsAsJson: String = "[]"
+    var ingredientsAsJson: String = "[]"
 
     @Column(nullable = false)
-    val description: String = ""
+    var description: String = ""
 
     // Unidirectional: Creates intermediate table
     @ManyToMany

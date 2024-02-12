@@ -7,8 +7,8 @@ import jakarta.validation.constraints.Size
 
 
 data class Meal(
-    @Size(min = 5, max = 1024) val title: String,
-    var introText: String,
-    val ingredients: List<Ingredient>,
+    @Size(min = 5, max = 1024) var title: String,
+    var introText: String?,
+    var ingredients: List<Ingredient>,
     var description: String,
-    var imageAsBase64Data: String)
+    var images: List<Image>)
