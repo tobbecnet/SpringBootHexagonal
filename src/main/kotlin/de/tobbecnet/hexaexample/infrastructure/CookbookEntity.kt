@@ -11,6 +11,5 @@ import java.util.UUID
 class CookbookEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private val id: UUID? = null
+    val id: UUID = UUID.randomUUID()
 }

@@ -1,7 +1,6 @@
 package de.tobbecnet.hexaexample.infrastructure
 
 import jakarta.persistence.*
-import jakarta.validation.constraints.Size
 import java.util.*
 
 
@@ -12,8 +11,7 @@ import java.util.*
 class MealEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    val id: UUID? = null
+    val id: UUID = UUID.randomUUID()
 
     @Column(length = 1024, nullable = false)
     val title: String = ""
@@ -21,9 +19,13 @@ class MealEntity {
     @Column
     var introText: String = ""
 
-    @Column(nullable = false)
+    @Column(length = 4096, nullable = false)
     val ingredientsAsJson: String = "[]"
 
     @Column(nullable = false)
     val description: String = ""
+
+    // Unidirectional: Creates intermediate table
+    @OneToMany
+    val imageCollection: List<PhotoCameraMotiveEntity> = listOf()
 }

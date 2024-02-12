@@ -1,3 +1,5 @@
 INSERT INTO meal_entity (id, title, intro_text, ingredients_as_json, description) VALUES (RANDOM_UUID(), 'Nasi Goreng', 'A classic dish. Add in any chopped veggies or some tofu.', '[]', 'description')
 INSERT INTO meal_entity (id, title, intro_text, ingredients_as_json, description) VALUES (RANDOM_UUID(), 'Gado Gado', 'Beautifully sweet. Vegetables made with peanut sauce - an all time classic dish.', '[]', 'description')
 INSERT INTO meal_entity (id, title, intro_text, ingredients_as_json, description) VALUES (RANDOM_UUID(), 'Risotto', 'When rice meets vegetables and flavors.', '[]', 'description')
+
+INSERT INTO photo_camera_motive_entity (id, type, jpg_small, jpg_medium, jpg_large) VALUES (RANDOM_UUID(), 'title', FILE_READ('classpath:static/img/example300x200.jpg'), FILE_READ('classpath:static/img/example600x400.jpg'), FILE_READ('classpath:static/img/example1200x800.jpg'))
