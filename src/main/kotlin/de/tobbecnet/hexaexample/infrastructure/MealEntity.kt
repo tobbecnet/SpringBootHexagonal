@@ -26,6 +26,11 @@ class MealEntity {
     val description: String = ""
 
     // Unidirectional: Creates intermediate table
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+        name="meal_to_photo_motive_im",
+        joinColumns = [JoinColumn(name="meal_id")],
+        inverseJoinColumns = [JoinColumn(name="photo_id")]
+    )
     val imageCollection: List<PhotoCameraMotiveEntity> = listOf()
 }
