@@ -11,4 +11,4 @@ data class Meal(
     var introText: String?,
     var ingredients: List<Ingredient>,
     var description: String,
-    var images: List<Image>)
+    var images: List<ImageMetadata>)
