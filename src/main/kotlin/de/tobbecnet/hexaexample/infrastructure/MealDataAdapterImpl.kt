@@ -27,7 +27,7 @@ class MealDataAdapterImpl(
                     description = it.description,
                     introText = it.introText,
                     ingredients = mapper.readValue<List<Ingredient>>(it.ingredientsAsJson),
-                    images = it.imageCollection.map { motive -> ImageMetadata(motive.id, motive.type) }
+                    images = it.photoMotiveCollection.map { motive -> ImageMetadata(motive.id, motive.type) }
                 )
             }
     }
