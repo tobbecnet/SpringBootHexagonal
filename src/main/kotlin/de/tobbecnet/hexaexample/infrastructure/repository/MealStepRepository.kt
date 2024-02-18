@@ -1,10 +1,10 @@
 package de.tobbecnet.hexaexample.infrastructure.repository
 
-import de.tobbecnet.hexaexample.infrastructure.PhotoCameraMotiveEntity
+import de.tobbecnet.hexaexample.infrastructure.MealStepEntity
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Component
 import java.util.*
 
 @Component
-interface ImageRepository : CrudRepository<PhotoCameraMotiveEntity, UUID> {
+interface MealStepRepository : CrudRepository<MealStepEntity, UUID> {
 }

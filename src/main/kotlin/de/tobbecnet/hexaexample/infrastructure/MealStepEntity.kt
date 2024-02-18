@@ -19,7 +19,7 @@ class MealStepEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mealEntityId")
-    var mealEntity: MealEntity = null!!
+    var mealEntity: MealEntity? = null
 
     @Lob
     @Column

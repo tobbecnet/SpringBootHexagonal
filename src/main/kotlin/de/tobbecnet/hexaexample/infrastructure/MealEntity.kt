@@ -32,7 +32,7 @@ class MealEntity {
     @Column(nullable = false)
     @Basic(fetch=FetchType.LAZY)            // Does not work without byte code manipulation
     // 1280x720, 16:9
-    var heroImageJpg: ByteArray = null!!
+    var heroImageJpg: ByteArray? = null
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "mealEntity")
     var mealSteps: List<MealStepEntity> = listOf()

@@ -6,6 +6,6 @@ import java.util.*
 // The domain object for images just holds the necessary data to create links
 // to the image controller.
 
-data class ImageMetadata(
+data class PhotoMotiveMetadata(
     val id: UUID,
     val type: String)

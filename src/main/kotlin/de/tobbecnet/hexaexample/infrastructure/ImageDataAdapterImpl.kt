@@ -1,35 +1,63 @@
 package de.tobbecnet.hexaexample.infrastructure
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.jacksonMapperBuilder
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
-import de.tobbecnet.hexaexample.domain.*
+import de.tobbecnet.hexaexample.domain.ImageDataAdapter
+import de.tobbecnet.hexaexample.domain.MealStepMotiveSize
+import de.tobbecnet.hexaexample.domain.PhotoMotiveSize
+import de.tobbecnet.hexaexample.exception.ImageBlobNotFoundException
 import de.tobbecnet.hexaexample.infrastructure.repository.ImageRepository
 import de.tobbecnet.hexaexample.infrastructure.repository.MealRepository
+import de.tobbecnet.hexaexample.infrastructure.repository.MealStepRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import java.util.UUID
+import java.util.*
 
 
 // Main purpose of this adapter implementation is mapping db entities to domain objects.
 @Component
 class ImageDataAdapterImpl(
-    @Autowired val imageRepository: ImageRepository
+    @Autowired val imageRepository: ImageRepository,
+    @Autowired val mealRepository: MealRepository,
+    @Autowired val mealStepRepository: MealStepRepository
 ) : ImageDataAdapter {
 
-    val mapper = jacksonObjectMapper()
-
-    override fun getImageBlobByIdAndSize(id: UUID, size: ImageSize): ByteArray {
+    override fun getImageBlobByIdAndSize(photoMotiveId: UUID, photoMotiveSize: PhotoMotiveSize): ByteArray {
         return imageRepository
-            .findById(id)
+            .findById(photoMotiveId)
             .orElseThrow()
             .let { entity ->
-                when(size) {
-                    ImageSize.small -> entity.jpgSmall
-                    ImageSize.medium -> entity.jpgMedium
-                    ImageSize.large -> entity.jpgLarge
+                when (photoMotiveSize) {
+                    PhotoMotiveSize.Small -> entity.jpgSmall
+                    PhotoMotiveSize.Medium -> entity.jpgMedium
+                    PhotoMotiveSize.Large -> entity.jpgLarge
                 }
-            } ?: throw IllegalArgumentException("No image found for id $id, size $size")
+            }
+            ?: throw ImageBlobNotFoundException(
+                "No photo motive image found for id $photoMotiveId, size $photoMotiveSize"
+            )
+    }
+
+    override fun getMealHeroImageBlobByMealId(mealId: UUID): ByteArray {
+        return mealRepository
+            .findById(mealId)
+            .orElseThrow()
+            .heroImageJpg ?: throw ImageBlobNotFoundException("No hero image found for id $mealId")
+    }
+
+    override fun getMealStepImageBlobByMealStepIdAndSize(
+        mealStepId: UUID,
+        mealStepMotiveSize: MealStepMotiveSize
+    ): ByteArray {
+        return mealStepRepository
+            .findById(mealStepId)
+            .orElseThrow()
+            .let { entity ->
+                when (mealStepMotiveSize) {
+                    MealStepMotiveSize.Small -> entity.jpgSmall
+                    MealStepMotiveSize.Large -> entity.jpgLarge
+                }
+            }
+            ?: throw ImageBlobNotFoundException(
+                "No meal step image found for id $mealStepId, size $mealStepMotiveSize"
+            )
     }
 }

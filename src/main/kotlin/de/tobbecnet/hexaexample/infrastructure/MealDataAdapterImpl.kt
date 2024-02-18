@@ -2,10 +2,7 @@ package de.tobbecnet.hexaexample.infrastructure
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import de.tobbecnet.hexaexample.domain.ImageMetadata
-import de.tobbecnet.hexaexample.domain.Ingredient
-import de.tobbecnet.hexaexample.domain.Meal
-import de.tobbecnet.hexaexample.domain.MealDataAdapter
+import de.tobbecnet.hexaexample.domain.*
 import de.tobbecnet.hexaexample.infrastructure.repository.MealRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -21,13 +18,22 @@ class MealDataAdapterImpl(
 
     override fun getAllMeals(): List<Meal> {
         return mealRepository.findAll()
-            .map {
+            .map { meal ->
                 Meal(
-                    title = it.title,
-                    description = it.description,
-                    introText = it.introText,
-                    ingredients = mapper.readValue<List<Ingredient>>(it.ingredientsAsJson),
-                    images = it.photoMotiveCollection.map { motive -> ImageMetadata(motive.id, motive.type) }
+                    id = meal.id,
+                    title = meal.title,
+                    introText = meal.introText,
+                    ingredients = mapper.readValue<List<Ingredient>>(meal.ingredientsAsJson),
+                    description = meal.description,
+                    mealSteps = meal.mealSteps.map { mealStep ->
+                        MealStep(mealStep.id, mealStep.stepDescription)
+                    },
+                    photoCameraMotives = meal.photoMotiveCollection.map { motive ->
+                        PhotoMotiveMetadata(
+                            motive.id,
+                            motive.type
+                        )
+                    }
                 )
             }
     }

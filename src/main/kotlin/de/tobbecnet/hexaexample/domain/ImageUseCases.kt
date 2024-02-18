@@ -4,5 +4,9 @@ import java.util.UUID
 
 interface ImageUseCases {
 
-    fun getImageBlobByIdAndSize(id: UUID, size: ImageSize): ByteArray
+    fun getPhotoMotiveBlobByMotiveIdAndSize(motiveId: UUID, motiveSize: PhotoMotiveSize): ByteArray
+
+    fun getMealHeroImageBlobByMealId(mealId: UUID): ByteArray
+
+    fun getMealStepImageBlobByMealStepIdAndSize(mealStepId: UUID, mealStepMotiveSize: MealStepMotiveSize): ByteArray
 }

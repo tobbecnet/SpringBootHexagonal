@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 
+// Let's see if there will be any code here in the future or if everything is just dispatched to the mealDataAdapter...
+// Todo's we will have to deal with somewhere are authZ and validation.
 @Component
 class MealServiceImpl(
     @Autowired val mealDataAdapter: MealDataAdapter
