@@ -2,23 +2,17 @@
 
 <div class="p-5 text-center bg-body-tertiary">
     <h1 class="m-3">{{title}}</h1>
-    <h4 class="m-2">{{subtitle}}</h4>
 </div>
 
 <div class="container">
-    {{#meals}}
+    {{#steps}}
     <div class="row my-3">
+
         <div class="col">
-            <img src="/photoMotive/Small/{{photoCameraMotives.0.id}}" />
-        </div>
-        <div class="col-sm-3">
-            <a href="/meal/{{id}}">{{title}}</a>
-        </div>
-        <div class="col">
-            {{introText}}
+            {{stepDescription}}
         </div>
     </div>
-    {{/meals}}
+    {{/steps}}
 </div>
 
 {{> footer}}
