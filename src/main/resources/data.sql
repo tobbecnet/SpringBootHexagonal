@@ -12,3 +12,4 @@ INSERT INTO meal_step_entity (id, step_description, meal_entity_id, jpg_small, j
 INSERT INTO meal_to_photo_motive_im (photo_motive_id, meal_id) VALUES ('aebff519-597e-4c00-afc5-c7f1f4f79de1', 'eebff519-597e-4c00-afc5-c7f1f4f79de1')
 INSERT INTO meal_to_photo_motive_im (photo_motive_id, meal_id) VALUES ('aebff519-597e-4c00-afc5-c7f1f4f79de1', 'eebff519-597e-4c00-afc5-c7f1f4f79de2')
 INSERT INTO meal_to_photo_motive_im (photo_motive_id, meal_id) VALUES ('aebff519-597e-4c00-afc5-c7f1f4f79de1', 'eebff519-597e-4c00-afc5-c7f1f4f79de3')
+INSERT INTO meal_to_photo_motive_im (photo_motive_id, meal_id) VALUES ('aebff519-597e-4c00-afc5-c7f1f4f79de1', 'eebff519-597e-4c00-afc5-c7f1f4f79de4')
