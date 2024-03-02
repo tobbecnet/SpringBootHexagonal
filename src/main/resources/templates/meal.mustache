@@ -9,9 +9,7 @@
     {{#meals}}
     <div class="row my-3">
         <div class="col">
-            {{#photoCameraMotives.value}}
-            <img src="/photoMotive/Small/{{id}}" />
-            {{/photoCameraMotives.value}}
+            <img src="/photoMotive/Small/{{photoCameraMotives.0.id}}" />
         </div>
         <div class="col-sm-3">
             <a href="/meal/{{id}}">{{title}}</a>

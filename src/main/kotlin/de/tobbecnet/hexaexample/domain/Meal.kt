@@ -13,5 +13,5 @@ data class Meal(
     var introText: String?,
     var ingredients: List<Ingredient>,
     var description: String,
-    var mealSteps: List<MealStep>,
-    var photoCameraMotives: List<PhotoMotiveMetadata>)
+    var mealSteps: Lazy<List<MealStep>>,
+    var photoCameraMotives: Lazy<List<PhotoMotiveMetadata>>)

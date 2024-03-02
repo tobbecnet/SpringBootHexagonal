@@ -2,6 +2,7 @@ package de.tobbecnet.hexaexample.domain
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.util.*
 
 
 // Let's see if there will be any code here in the future or if everything is just dispatched to the mealDataAdapter...
@@ -14,6 +15,10 @@ class MealServiceImpl(
 
     override fun getAllMeals(): Collection<Meal> {
         return mealDataAdapter.getAllMeals()
+    }
+
+    override fun getMeal(id: UUID): Meal {
+        return mealDataAdapter.getMeal(id)
     }
 
     override fun addMeal(meal: Meal) {

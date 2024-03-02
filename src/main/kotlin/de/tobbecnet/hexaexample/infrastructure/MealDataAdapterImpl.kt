@@ -6,6 +6,7 @@ import de.tobbecnet.hexaexample.domain.*
 import de.tobbecnet.hexaexample.infrastructure.repository.MealRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.util.*
 
 
 // Main purpose of this adapter implementation is mapping db entities to domain objects.
@@ -18,23 +19,35 @@ class MealDataAdapterImpl(
 
     override fun getAllMeals(): List<Meal> {
         return mealRepository.findAll()
-            .map { meal ->
-                Meal(
-                    id = meal.id,
-                    title = meal.title,
-                    introText = meal.introText,
-                    ingredients = mapper.readValue<List<Ingredient>>(meal.ingredientsAsJson),
-                    description = meal.description,
-                    mealSteps = meal.mealSteps.map { mealStep ->
-                        MealStep(mealStep.id, mealStep.stepDescription)
-                    },
-                    photoCameraMotives = meal.photoMotiveCollection.map { motive ->
-                        PhotoMotiveMetadata(
-                            motive.id,
-                            motive.type
-                        )
-                    }
-                )
+            .map { entityToDomain(it) }
+    }
+
+    override fun getMeal(id: UUID): Meal {
+        return mealRepository.findById(id)
+            .orElseThrow()
+            .let { entityToDomain(it) }
+    }
+
+    private fun entityToDomain(meal: MealEntity): Meal {
+        return Meal(
+            id = meal.id,
+            title = meal.title,
+            introText = meal.introText,
+            ingredients = mapper.readValue<List<Ingredient>>(meal.ingredientsAsJson),
+            description = meal.description,
+            mealSteps = lazy {          // Works as we currently use OSIV
+                meal.mealSteps.map { mealStep ->
+                    MealStep(mealStep.id, mealStep.stepDescription)
+                }
+            },
+            photoCameraMotives = lazy {         // Works as we currently use OSIV
+                meal.photoMotiveCollection.map { motive ->
+                    PhotoMotiveMetadata(
+                        motive.id,
+                        motive.type
+                    )
+                }
             }
+        )
     }
 }
