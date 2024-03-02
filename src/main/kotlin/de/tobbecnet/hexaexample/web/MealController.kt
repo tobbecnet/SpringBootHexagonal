@@ -21,11 +21,19 @@ class MealController(
 ) {
 
     @GetMapping("/meal/{id}")
-    fun Index(model: Model, @PathVariable id: UUID): String {
+    fun Meal(model: Model, @PathVariable id: UUID): String {
+
         val meal = mealUseCases.getMeal(id)
 
-        model["title"] = meal.title
+        model.addAttribute("title", "The Eurasian vegetarian")
+
+        model["mealId"] = meal.id
+        model["mealTitle"] = meal.title
+        model["introText"] = meal.introText
+        model["ingredients"] = meal.ingredients
+        model["description"] = meal.description
         model["steps"] = meal.mealSteps.value
+
         return "meal"
     }
 }

@@ -1,13 +1,40 @@
 {{> header}}
 
 <div class="p-5 text-center bg-body-tertiary">
-    <h1 class="m-3">{{title}}</h1>
+    <img class="img-fluid" src="/mealHeroImage/{{mealId}}" />
+    <h1 class="m-3">{{mealTitle}}</h1>
 </div>
 
 <div class="container">
+    <p>{{introText}}</p>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Menge</th>
+            <th scope="col">Einheit</th>
+            <th scope="col">Zutat</th>
+            <th scope="col">Bemerkung</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{#ingredients}}
+            <tr>
+                <td>{{quantity}}</td>
+                <td>{{unit}}</td>
+                <td>{{ingredient}}</td>
+                <td>{{additionalDescription}}</td>
+            </tr>
+            {{/ingredients}}
+        </tbody>
+    </table>
+
+    <p>{{description}}</p>
     {{#steps}}
     <div class="row my-3">
-
+        <div class="col-sm-3">
+            <img class="img-fluid" src="/mealStepMotive/Small/{{id}}" />
+        </div>
         <div class="col">
             {{stepDescription}}
         </div>
