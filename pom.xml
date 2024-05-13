@@ -16,6 +16,7 @@
     <properties>
         <java.version>17</java.version>
         <kotlin.version>1.9.21</kotlin.version>
+        <frontend.plugin.version>1.15.0</frontend.plugin.version>
     </properties>
     <!-- TODO Split up projects. Minimum domain core, Infrastructure/DB, API, Web. -->
     <!-- TODO Add DependencyManagement section. -->
@@ -67,7 +68,7 @@
         <dependency>
             <groupId>com.github.eirslett</groupId>
             <artifactId>frontend-maven-plugin</artifactId>
-            <version>1.15.0</version>
+            <version>${frontend.plugin.version}</version>
         </dependency>
     </dependencies>
 
@@ -110,6 +111,37 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
+                <version>${frontend.plugin.version}</version>
+                <configuration>
+                    <installDirectory>target</installDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>v20.13.1</nodeVersion>
+                            <npmVersion>10.5.2</npmVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>webpack build</id>
+                        <goals>
+                            <goal>webpack</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
