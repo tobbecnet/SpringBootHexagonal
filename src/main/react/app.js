@@ -1,30 +1,74 @@
 'use strict';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { useEffect, useState } from 'react';
 
+// https://blog.logrocket.com/modern-api-data-fetching-methods-react/
+// mvn frontend:webpack resources:resources
 
-class App extends React.Component {
+export function App(props) {
 
-    constructor(props) {
-        super(props);
-        this.state = { meals: [] };
-    }
+    const [loaded, setLoaded] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [meals, setMeals] = useState({"content": []});
+    const [error, setError] = useState("none");
 
-    componentDidMount() {
+    useEffect(() => {
+        const fetchData = async() => {
+            try {
+                setLoaded(false);
+                setLoading(true);
 
-    }
+                const response = await fetch('/api/meal')
 
-    render() {
-        return (
+                if(!response.ok) {
+                    throw new Error("Http Error, status ${response.status}.")
+                }
+
+                let mealsData = await response.json();
+
+                setMeals(mealsData);
+                setLoaded(true);
+
+            } catch(err) {
+                setError(err.message)
+                setLoaded(false)
+            } finally {
+                setLoading(false)
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    return (
+        <div>
             <div>
-                <p>React working...</p>
+                <p>React 18 working ...</p>
             </div>
-        );
-    }
+            <div>
+                <p>Loading: { loading.toString() }</p>
+            </div>
+            <div>
+                <p>Loaded: { loaded.toString() }</p>
+            </div>
+            <div>
+                <p>Error: { error }</p>
+            </div>
+            <div>
+                <p>Meals: { JSON.stringify(meals) }</p>
+            </div>
+        </div>
+    );
 }
 
-ReactDOM.render(
-	<App />,
-	document.getElementById('react')
-)
+const root = createRoot(document.getElementById('react'))
+root.render(<App />)
+
+// Usable only with react <= 17
+//ReactDOM.render(
+//	<App />,
+//	document.getElementById('react')
+//)
