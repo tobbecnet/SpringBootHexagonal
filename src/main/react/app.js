@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { StrictMode } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { useEffect, useState } from 'react';
@@ -38,7 +39,11 @@ export function App(props) {
 }
 
 const root = createRoot(document.getElementById('react'))
-root.render(<App />)
+root.render(
+    <StrictMode>
+        <App />
+    </StrictMode>
+);
 
 // Usable only with react <= 17
 //ReactDOM.render(
