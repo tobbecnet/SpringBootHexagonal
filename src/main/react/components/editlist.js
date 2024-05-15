@@ -2,7 +2,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createRoot } from 'react-dom/client';
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet } from "react-router-dom";
 
@@ -42,25 +41,44 @@ export function EditList(props) {
     }, []);
 
     return (
-        <div>
-            <div>
-                <p>React 18 working ...</p>
-            </div>
-            <div>
-                <p>Loading: { loading.toString() }</p>
-            </div>
-            <div>
-                <p>Loaded: { loaded.toString() }</p>
-            </div>
-            <div>
-                <p>Error: { error }</p>
-            </div>
-            <div>
-                <NavLink to="/admin/edit">Edit</NavLink>
-            </div>
-            <div>
-                <p>Meals: { JSON.stringify(meals) }</p>
-            </div>
-        </div>
+        <>
+            { loading
+                ? (<div>LOADING...</div>)
+                : (<MenuList meals={meals} />) }
+        </>
+    );
+}
+
+function MenuList(props) {
+
+    return (
+        <table className="table table-striped-rows">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {
+                props.meals.content.map((menu, i) =>
+                    <MenuElement key={menu.id} menu={menu} />
+                )
+            }
+            </tbody>
+        </table>
+    )
+}
+
+function MenuElement(props) {
+
+    return (
+        <>
+            <tr>
+                <td>{props.menu.id}</td>
+                <td>{props.menu.title}</td>
+            </tr>
+        </>
     )
 }

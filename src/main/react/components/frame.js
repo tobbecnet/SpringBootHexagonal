@@ -2,24 +2,31 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createRoot } from 'react-dom/client';
 import { useEffect, useState } from 'react';
 
 export function Header(props) {
 
     return (
-        <nav className="navbar fixed-top bg-light">
-            <div className="container-fluid">
-                <a className="navbar-brand" href="/admin">Cookbook Admin</a>
+        <>
+            <nav className="navbar fixed-top bg-light">
+                <div className="container-fluid">
+                    <a className="navbar-brand" href="/admin">Cookbook Admin</a>
+                </div>
+            </nav>
+
+            {/* prevent overlap with position: fixed navbar */}
+            <div className="container">
+                <div className="row mt-5">&nbsp;</div>
             </div>
-        </nav>
-    )
+        </>
+    );
 }
 
 export function Footer(props) {
 
     return (
         <>
+            {/* prevent overlap with position: fixed footer */}
             <div className="container">
                 <div className="row mb-5">&nbsp;</div>
             </div>
@@ -33,5 +40,5 @@ export function Footer(props) {
                 </div>
             </footer>
         </>
-    )
+    );
 }

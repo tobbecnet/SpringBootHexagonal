@@ -6,9 +6,9 @@ import { StrictMode } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { useEffect, useState } from 'react';
-import { Header, Footer } from './frame';
-import { EditList } from './editlist';
-import { EditMeal } from './editmeal';
+import { Header, Footer } from './components/frame';
+import { PageList } from './page-list';
+import { PageEdit } from './page-edit';
 
 
 // https://blog.logrocket.com/modern-api-data-fetching-methods-react/
@@ -28,8 +28,8 @@ export function App(props) {
 
             <BrowserRouter>
                 <Routes>
-                    <Route path="/admin" element={ <EditList /> } />
-                    <Route path="/admin/edit" element={ <EditMeal /> } />
+                    <Route path="/admin" element={ <PageList /> } />
+                    <Route path="/admin/edit" element={ <PageEdit /> } />
                 </Routes>
             </BrowserRouter>
 
