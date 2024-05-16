@@ -5,6 +5,16 @@ module.exports = {
     devtool: 'source-map',
     cache: true,
     mode: 'development',
+    devServer: {
+        port: 8081,
+        proxy: [
+            {
+                context: ['/api'],
+                target: 'http://localhost:8080'
+            },
+        ],
+        historyApiFallback: true
+    },
     output: {
         path: __dirname,
         filename: './src/main/resources/static/built/bundle.js'
@@ -20,7 +30,11 @@ module.exports = {
                         presets: ["@babel/preset-env", "@babel/preset-react"]
                     }
                 }]
-            }
+            },
+            {
+                test: /\.(css)$/,
+                use: ['style-loader', 'css-loader'],
+            },
         ]
     }
 };

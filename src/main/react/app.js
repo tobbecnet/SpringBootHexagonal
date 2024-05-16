@@ -10,6 +10,7 @@ import { Header, Footer } from './components/frame';
 import { PageList } from './page-list';
 import { PageEdit } from './page-edit';
 
+import '../resources/static/css/bootstrap.css';
 
 // https://blog.logrocket.com/modern-api-data-fetching-methods-react/
 // mvn frontend:webpack resources:resources
