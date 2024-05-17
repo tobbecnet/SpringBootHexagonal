@@ -25,6 +25,9 @@ import java.util.UUID
 import kotlin.math.min
 
 
+data class PostResult(val message:String)
+
+
 @RestController
 @RequestMapping("api/meal")
 class MealApiController(
@@ -72,8 +75,8 @@ class MealApiController(
     }
 
     @PostMapping("")
-    fun postOne() {
-        // TODO: Create form, check data formats.
+    fun postOne(): ResponseEntity<PostResult> {
+        return ResponseEntity.status(HttpStatus.CREATED).body(PostResult("We got a message."));
     }
 
     // Cannot parse id param to UUID
@@ -81,7 +84,7 @@ class MealApiController(
     @ResponseBody
     fun handle(e: MethodArgumentTypeMismatchException): ResponseEntity<ProblemDetail> =
         ResponseEntity
-            .status(500)
+            .status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(
                 ProblemDetail.forStatusAndDetail(
                     HttpStatus.INTERNAL_SERVER_ERROR,

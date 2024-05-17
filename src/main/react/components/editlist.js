@@ -1,16 +1,21 @@
 'use strict';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { useEffect, useState } from 'react';
-import { NavLink, Outlet } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 export function EditList(props) {
+
+    const navigate = useNavigate();
 
     const [loaded, setLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
     const [meals, setMeals] = useState({"content": []});
     const [error, setError] = useState("none");
+
+    const handleCreateNew = async () => {
+        navigate("/admin/edit");
+    }
 
     useEffect(() => {
         const fetchData = async() => {
@@ -45,6 +50,8 @@ export function EditList(props) {
             { loading
                 ? (<div>LOADING...</div>)
                 : (<MenuList meals={meals} />) }
+
+            <button type="button" className="btn btn-primary m-3" onClick={handleCreateNew}>Create new</button>
         </>
     );
 }
