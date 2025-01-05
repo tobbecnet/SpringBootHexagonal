@@ -7,6 +7,8 @@ import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import java.util.UUID
 
 
@@ -21,7 +23,7 @@ class MealController(
 ) {
 
     @GetMapping("/meal/{id}")
-    fun Meal(model: Model, @PathVariable id: UUID): String {
+    fun meal(model: Model, @PathVariable id: UUID): String {
 
         val meal = mealUseCases.getMeal(id)
 
@@ -32,7 +34,7 @@ class MealController(
         model["introText"] = meal.introText
         model["ingredients"] = meal.ingredients
         model["description"] = meal.description
-        model["steps"] = meal.mealSteps.value
+        model["steps"] = meal.mealSteps
 
         return "meal"
     }

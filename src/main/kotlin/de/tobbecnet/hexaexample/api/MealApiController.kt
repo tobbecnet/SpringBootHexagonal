@@ -10,14 +10,7 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ProblemDetail
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
 import org.springframework.web.server.ResponseStatusException
 import java.util.NoSuchElementException
@@ -35,7 +28,7 @@ class MealApiController(
 ) {
 
 
-    @GetMapping("")
+    @GetMapping("/**")
     fun getPage(
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "10") size: Int
@@ -56,9 +49,9 @@ class MealApiController(
         }
 
         val mealsSubList = meals.subList(startIndex, endIndex)
-        val page = PageImpl(mealsSubList, PageRequest.of(page, size), totalSize.toLong())
+        val pageContent = PageImpl(mealsSubList, PageRequest.of(page, size), totalSize.toLong())
 
-        return page
+        return pageContent
     }
 
     @GetMapping("/{id}")
@@ -74,8 +67,8 @@ class MealApiController(
         }
     }
 
-    @PostMapping("")
-    fun postOne(): ResponseEntity<PostResult> {
+    @PostMapping("/**")
+    fun postOne(@RequestBody meal: Meal): ResponseEntity<PostResult> {
         return ResponseEntity.status(HttpStatus.CREATED).body(PostResult("We got a message."));
     }
 

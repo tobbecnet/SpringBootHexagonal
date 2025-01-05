@@ -35,18 +35,14 @@ class MealDataAdapterImpl(
             introText = meal.introText,
             ingredients = mapper.readValue<List<Ingredient>>(meal.ingredientsAsJson),
             description = meal.description,
-            mealSteps = lazy {          // Works as we currently use OSIV
-                meal.mealSteps.map { mealStep ->
-                    MealStep(mealStep.id, mealStep.stepDescription)
-                }
+            mealSteps = meal.mealSteps.map { mealStep ->
+                MealStep(mealStep.id, mealStep.stepDescription)
             },
-            photoCameraMotives = lazy {         // Works as we currently use OSIV
-                meal.photoMotiveCollection.map { motive ->
-                    PhotoMotiveMetadata(
-                        motive.id,
-                        motive.type
-                    )
-                }
+            photoCameraMotives = meal.photoMotiveCollection.map { motive ->
+                PhotoMotiveMetadata(
+                    motive.id,
+                    motive.type
+                )
             }
         )
     }
